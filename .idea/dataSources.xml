@@ -7,5 +7,15 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/prog3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="src:java:hibernate.cfg.xml/Hibernate" uuid="eb7f33c5-be55-4529-a9ac-89462feadbcb">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/atom/IdeaProjects/DrinkVendingMachine/src/java/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/prog3</jdbc-url>
+    </data-source>
   </component>
 </project>
