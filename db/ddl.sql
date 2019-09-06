@@ -29,7 +29,7 @@ CREATE TABLE purchase
 
   CHECK (cc_number ~ '\d{16}'),
   CHECK ( (credit_card IS TRUE) OR (cc_number IS NULL)), -- if true than insert
-  CHECK ( (credit_card IS FALSE) OR (cc_number IS NOT NULL)), -- if false than NULL
+  CHECK ( (credit_card IS FALSE) OR (cc_number IS NOT NULL)), -- if false than must be NULL
   CHECK ( (cash IS TRUE AND credit_card IS FALSE AND id_key IS NULL) OR
           (cash IS FALSE AND credit_card IS TRUE AND id_key IS NULL) OR
           (cash IS FALSE AND  credit_card IS FALSE AND id_key IS NOT NULL))

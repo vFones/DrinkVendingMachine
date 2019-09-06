@@ -1,25 +1,25 @@
 package com.prog3.hibernate.dao;
 
-import com.prog3.hibernate.model.User;
+import com.prog3.hibernate.model.Key;
 
 import java.util.List;
 
 /**
- * UserDAO implementation
+ * KeyDAO implementation
  * @author Vittorio Fones
  */
-public class UserDao extends GenericDao<User>{
-  public void save(User u) {
-    super.save(u);
+public class KeyDao extends GenericDao<Key>{
+  public void save(Key k) {
+    super.save(k);
   }
   public void delete(int id) {
     super.delete(id);
   }
-  public void update(User u) {
-    super.update(u);
+  public void update(Key k) {
+    super.update(k);
   }
-  public List<User> getAll() {
-    return super.getAll("from User");
+  public List<Key> getAll() {
+    return super.getAll("from Key");
   }
 }
 
