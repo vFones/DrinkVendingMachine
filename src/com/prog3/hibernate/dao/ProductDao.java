@@ -9,19 +9,30 @@ import java.util.List;
  * @author Vittorio Fones
  */
 public class ProductDao extends GenericDao<Product>{
+  private final String selectStarFromProduct = "from Product";
+
   @Override
   public void save(Product p) {
-    super.save(p);
   }
   @Override
   public void delete(int id) {
-    super.delete(id);
   }
   @Override
   public void update(Product p) {
-    super.update(p);
   }
-  public List<Product> getAll() {
-    return super.getAll("from Product");
+  public List<Product> query(String s){
+    return super.query(s);
+  }
+  public List<Product> getAll(){
+    return super.query(selectStarFromProduct);
+  }
+
+  //intented for testing queries
+  public static void main(String[]args) {
+    ProductDao prod = new ProductDao();
+    List<Product> dio = prod.getAll();
+    for (Product u : dio) {
+      System.out.println(u.getName());
+    }
   }
 }

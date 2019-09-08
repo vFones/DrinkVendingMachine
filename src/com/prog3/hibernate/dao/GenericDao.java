@@ -53,34 +53,14 @@ public class GenericDao<T> {
       }
     }.run();
   }
-
   /**
-   * Get model By ID
-   * @param id
-   * pass id of tables
-   * @return aka PK
-   */
-  public Class get(final int id) {
-    final Class[] model = {null};
-    new Hibernate(){
-      @Override
-      public void dbOperations(Session session) {
-        model[0] = session.get(Class.class, id);
-      }
-    }.run();
-
-    return model[0];
-  }
-
-  /**
-   * Get all model
+   * Query a model
    * @param query string
    * @return List <T>
    */
-  public List<T> getAll(final String query) {
-    final List<T>[] list = new List[1];
+  public List<T> query(final String query) {
+    final List[] list = new List[1];
     new Hibernate(){
-      @SuppressWarnings("unchecked")
       @Override
       public void dbOperations(Session session) {
         list[0] = session.createQuery(query).list();

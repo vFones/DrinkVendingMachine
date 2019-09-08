@@ -9,18 +9,28 @@ import java.util.List;
  * @author Vittorio Fones
  */
 public class KeyDao extends GenericDao<Key>{
+  final static String selectStarFrom = "from Key";
+
+  @Override
   public void save(Key k) {
     super.save(k);
   }
+  @Override
   public void delete(int id) {
     super.delete(id);
   }
+  @Override
   public void update(Key k) {
     super.update(k);
   }
-  public List<Key> getAll() {
-    return super.getAll("from Key");
+
+  public List<Key> query(String s){
+    return super.query(s);
   }
+  public List<Key> getAll() {
+    return super.query(selectStarFrom);
+  }
+
 }
 
 /*public class UserDao{

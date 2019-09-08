@@ -14,12 +14,12 @@ import java.sql.Timestamp;
 public class Purchase{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "purchase_id")
+  @Column(name="purchase_id")
   private int purchase_id;
   @Column(name="date", nullable = false)
   private Timestamp date;
   @OneToOne
-  @JoinColumn(name = "prod_id", nullable = false)
+  @JoinColumn(name="prod_id", nullable = false)
   private Product product;
   @Column(name="cash", nullable = false)
   private boolean cash;
@@ -28,7 +28,7 @@ public class Purchase{
   @Column(name="cc_number")
   private String cc_number;
   @OneToOne
-  @Column(name="id_key")
+  @JoinColumn(name="id_key")
   private Key key;
 
   public Purchase(){}

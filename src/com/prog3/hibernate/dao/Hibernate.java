@@ -16,7 +16,6 @@ public abstract class Hibernate {
    */
   public abstract void dbOperations(Session session);
 
-
   public void run(){
     Transaction transaction = null;
     try{
@@ -28,6 +27,8 @@ public abstract class Hibernate {
       dbOperations(session);
 
       transaction.commit();
+      sessionFactory.close();
+
     } catch (Exception e) {
       if (transaction != null) {
         transaction.rollback();

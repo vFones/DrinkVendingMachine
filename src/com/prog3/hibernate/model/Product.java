@@ -1,11 +1,6 @@
 package com.prog3.hibernate.model;
 
-import org.jetbrains.annotations.Contract;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Product.java
