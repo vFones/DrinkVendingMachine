@@ -42,25 +42,3 @@ body {
  }
 
 
- .calculator_display {
-    background-color: #222222;
-    color: #fff;
-    font-size: 1.714285714em;
-    font-family: Calculator;
-    text-align: right;
-}
-
-
-.calculator_keys {
-    background-color: #999;
-    display: grid;
-    grid-gap: 1px;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.calculator_keys > * {
-    padding: 0.5em 1.25em;
-    position: relative;
-    text-align: center;
-}
-
