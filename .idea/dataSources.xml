@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="prog3@localhost" uuid="65a62136-25e4-4cc7-83f2-bab0783b6d79">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/prog3</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="src:java:hibernate.cfg.xml/Hibernate" uuid="eb7f33c5-be55-4529-a9ac-89462feadbcb">
+
+    <data-source source="LOCAL" name="src:java:hibernate.cfg.xml/Hibernate">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>Hibernate
-
-C:/Users/atom/IdeaProjects/DrinkVendingMachine/src/java/hibernate.cfg.xml</remarks>
+        C:/Users/atom/IdeaProjects/DrinkVendingMachine/src/com/prog3/hibernate/hibernate.cfg.xml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/prog3</jdbc-url>
     </data-source>
+
   </component>
 </project>
