@@ -7,12 +7,14 @@ import java.util.List;
 
 /**
  * CRUD database operations
- * @author Vittorio Fones
  *
+ * @param <T> the type parameter
+ * @author Vittorio Fones
  */
 public class GenericDao<T> {
   /**
    * Save model
+   *
    * @param t aka model
    */
   public void save( final T t ) {
@@ -26,6 +28,7 @@ public class GenericDao<T> {
 
   /**
    * Update
+   *
    * @param t aka model
    */
   public void update( final T t) {
@@ -39,22 +42,21 @@ public class GenericDao<T> {
 
   /**
    * Delete
-   * @param id aka PK
+   *
+   * @param t aka model
    */
-  public void delete(final int id) {
+  public void remove(T t) {
     new Hibernate(){
       @Override
       public void dbOperations(Session session) {
-        Class model = session.get(Class.class, id);
-        if (model != null) {
-          session.delete(model);
-          System.out.println("user is deleted");
-        }
+        session.remove(t);
       }
     }.run();
   }
+
   /**
    * Query a model
+   *
    * @param query string
    * @return List <T>
    */

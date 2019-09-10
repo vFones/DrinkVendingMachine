@@ -1,38 +1,48 @@
 package com.prog3.hibernate.dao;
 
-import com.prog3.hibernate.model.Product;
+import com.prog3.hibernate.ormbean.ProductBean;
 
 import java.util.List;
 
 /**
  * Product DAO implementation
+ *
  * @author Vittorio Fones
  */
-public class ProductDao extends GenericDao<Product>{
-  private final String selectStarFromProduct = "from Product";
+public class ProductDao extends GenericDao<ProductBean>{
+  private final String selectStarFromProduct = "from ProductBean";
 
   @Override
-  public void save(Product p) {
+  public void save(ProductBean p) {
+    super.save(p);
   }
   @Override
-  public void delete(int id) {
+  public void remove(ProductBean p) {
+    super.remove(p);
   }
   @Override
-  public void update(Product p) {
+  public void update(ProductBean p) {
+    super.update(p);
   }
-  public List<Product> query(String s){
+  public List<ProductBean> query(String s){
     return super.query(s);
   }
-  public List<Product> getAll(){
+
+  /**
+   * Get all list.
+   *
+   * @return the list
+   */
+  public List<ProductBean> getAll(){
     return super.query(selectStarFromProduct);
   }
 
   //intented for testing queries
-  public static void main(String[]args) {
+  /*public static void main(String[]args) {
     ProductDao prod = new ProductDao();
-    List<Product> dio = prod.getAll();
-    for (Product u : dio) {
+    List<ProductBean> dio = prod.getAll();
+    for (ProductBean u : dio) {
       System.out.println(u.getName());
     }
-  }
+  }*/
 }

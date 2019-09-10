@@ -1,33 +1,43 @@
 package com.prog3.hibernate.dao;
 
-import com.prog3.hibernate.model.Key;
+import com.prog3.hibernate.ormbean.KeyBean;
 
 import java.util.List;
 
 /**
  * KeyDAO implementation
+ *
  * @author Vittorio Fones
  */
-public class KeyDao extends GenericDao<Key>{
-  final static String selectStarFrom = "from Key";
+public class KeyDao extends GenericDao<KeyBean>{
+  /**
+   * The constant selectStarFrom.
+   */
+  final static String selectStarFrom = "from KeyBean";
 
   @Override
-  public void save(Key k) {
+  public void save(KeyBean k) {
     super.save(k);
   }
   @Override
-  public void delete(int id) {
-    super.delete(id);
+  public void remove(KeyBean k) {
+    super.remove(k);
   }
   @Override
-  public void update(Key k) {
+  public void update(KeyBean k) {
     super.update(k);
   }
 
-  public List<Key> query(String s){
+  public List<KeyBean> query(String s){
     return super.query(s);
   }
-  public List<Key> getAll() {
+
+  /**
+   * Gets all.
+   *
+   * @return the all
+   */
+  public List<KeyBean> getAll() {
     return super.query(selectStarFrom);
   }
 

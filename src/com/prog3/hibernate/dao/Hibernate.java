@@ -7,15 +7,20 @@ import org.hibernate.cfg.Configuration;
 
 /**
  * Create db connection every time need to perform a dbOperations
+ *
  * @author Vittorio Fones
  */
 public abstract class Hibernate {
   /**
    * Need to implement db operations
-   * @param session
+   *
+   * @param session the session
    */
   public abstract void dbOperations(Session session);
 
+  /**
+   * Run.
+   */
   public void run(){
     Transaction transaction = null;
     try{
@@ -29,7 +34,7 @@ public abstract class Hibernate {
       transaction.commit();
       sessionFactory.close();
 
-    } catch (Exception e) {
+    }catch (Exception e) {
       if (transaction != null) {
         transaction.rollback();
       }
