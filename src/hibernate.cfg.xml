@@ -14,8 +14,8 @@
         <property name="hibernate.show_sql"> true </property>
         <property name="hibernate.current_session_context_class"> thread </property>
         <property name="hbm2ddl.auto"> update </property>
-        <mapping class="com.prog3.hibernate.model.Key"/>
-        <mapping class="com.prog3.hibernate.model.Product"/>
-        <mapping class="com.prog3.hibernate.model.Purchase"/>
+        <mapping class="com.prog3.hibernate.ormbean.KeyBean"/>
+        <mapping class="com.prog3.hibernate.ormbean.ProductBean"/>
+        <mapping class="com.prog3.hibernate.ormbean.PurchaseBean"/>
     </session-factory>
 </hibernate-configuration>
