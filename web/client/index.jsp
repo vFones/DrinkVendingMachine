@@ -1,5 +1,6 @@
-<%@ page import="com.prog3.hibernate.model.Product" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="com.prog3.hibernate.ormbean.ProductBean" %>
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: vittorio
   Date: 2019-08-14
@@ -23,14 +24,14 @@
 <body>
   <div class="container col-2"></div>
   <div class="container col">
-    <form action="confirm" method="post">
+    <form action="submit" method="post">
       <div class="container col">
         <%--Sugar slider--%>
         <div class="row">
           <div class="col-3"></div>
           <div class=".col-auto .mr-auto"><b>Sugar: </b></div>
           <div class="col-1"></div>
-          <div class="col-3"><input type="range" class="custom-range" min="0" max="5" step="1" id="customRange"></div>
+          <div class="col-3"><input type="range" class="custom-range" min="0" max="5" step="1" id="customRange" name="sugar"></div>
           <div class="col-1"></div>
           <div class=".col-auto .mr-auto"><b id="customRangeValue"></b></div>
           <script>
@@ -58,14 +59,17 @@
                 </tr>
               </thead>
               <%
-                List<Product> list = (List <Product>) request.getAttribute("list");
+                List<ProductBean> list = (List <ProductBean>) request.getAttribute("list");
                 int i = 0;
-                for ( Product x : list) {
+                for ( ProductBean x : list) {
                   i++;
               %>
               <tbody>
-                <tr class="clickable-row">
-                  <th scope="row"> <%= i %> </th>
+                <tr class="clickable-row" >
+                  <th scope="row" >
+                    <input type="hidden" class="drinkId" name="" value="<%= x.getProd_id() %>">
+                    <%= x.getProd_id() %>
+                  </th>
                   <td> <%= x.getName() %> </td>
                   <td> <%= x.getPrice() %> </td>
                 </tr>
@@ -88,21 +92,31 @@
                 out.println(msg);
               %></marquee>
             </div>
-            <div class="col-2" id="moneyDisplay">0.0</div>
+            <div class="col-2" id="moneyDisplay">
+              <%
+                String coins = (String) request.getAttribute("coins");
+                out.println(coins);
+              %>
+            </div>
+            <input type="hidden" id="inputDisplay" name="coins" value="<%=(String) request.getAttribute("coins")%>">
           </div>
         </div>
         <!--buttons-->
         <div class="container-fluid">
+          <!-- key and c.c. payment -->
           <div class="row">
-            <input type="text" class="col form-control btn btn-primary btn-lg" id="keyId" placeholder="key">
-            <!--button type="button" class="col btn btn-primary btn-lg" data-toggle="button" aria-pressed="false"> key </button-->
-            <input type="text" class="col form-control btn btn-light btn-lg" id="ccId" placeholder="c.c">
-            <!--button type="button" class="col btn btn-light btn-lg"> c.c. </button-->
+            <input type="text" class="col form-control btn btn-light btn-lg" id="ccId" name="ccId" placeholder="c.c.">
+            <input type="text" class="col-5 btn btn-primary btn-lg form-control" id="keyId" name="keyId" placeholder="key">
+            <style>
+              input[id="keyId"]::placeholder {
+                color: white;
+              }
+            </style>
           </div>
-          <div class="row">
-            <div class="container-fluid">
+          <!-- coins payment -->
+          <div class="">
+            <div class="row">
               <select id="selectedCoin" class="col form-control btn btn-warning btn-lg">
-                <option>Coin...</option>
                 <option>0.05€</option>
                 <option>0.10€</option>
                 <option>0.20€</option>
@@ -110,10 +124,23 @@
                 <option>1.00€</option>
                 <option>2.00€</option>
               </select>
-              <button type="button" class="col btn btn-warning btn-lg" id="insertCoin">insert coin</button>
+              <select id="selectedBills" name="bill" class="col-5 form-control btn btn-primary btn-lg">
+                <option>5.00€</option>
+                <option>10.00€</option>
+                <option>20.00€</option>
+                <option>50.00€</option>
+              </select>
             </div>
-            <button type="submit" class="col btn btn-success success btn-lg">confirm</button>
+            <div class="row">
+              <button type="button" class="col btn btn-warning btn-lg" id="insertCoin">insert coin</button>
+              <button type="submit" name="rechargeKey" value="rechargeKey" class="col-5 btn btn-primary btn-lg" id="insertBill">recharge key</button>
+            </div>
+            <!-- Confirm button -->
+            <div class="row">
+            <button type="submit" name="confirmPurchase" value="confirmPurchase" class="col container btn btn-success success btn-lg">confirm</button>
+            </div>
           </div>
+
         </div>
       </div>
     </form>
@@ -123,7 +150,7 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">1) Select sugar quantity within the slider</li>
       <li class="list-group-item">2) Select drink from the list</li>
-      <li class="list-group-item">3) Select payment method</li>
+      <li class="list-group-item">3) Select payment method (cash, c.c. (contact-less) or rechargeable key)</li>
       <li class="list-group-item">4) Wait for dispatch</li>
     </ul>
   </div>
