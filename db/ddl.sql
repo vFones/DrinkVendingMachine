@@ -7,7 +7,7 @@ CREATE TABLE product
 (
   prod_id SERIAL PRIMARY KEY,
   price FLOAT NOT NULL,
-  stock INT NOT NULL,
+  stock FLOAT NOT NULL,
   name VARCHAR(100) NOT NULL UNIQUE
 );
 
@@ -34,4 +34,5 @@ CREATE TABLE purchase
           (cash IS FALSE AND credit_card IS TRUE AND id_key IS NULL) OR
           (cash IS FALSE AND  credit_card IS FALSE AND id_key IS NOT NULL))
 );
+
 
