@@ -3,14 +3,43 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-  <servlet>
-    <display-name>client</display-name>
-    <servlet-name>clientServlet</servlet-name>
-    <servlet-class>com.prog3.servlet.ClientServlet</servlet-class>
-  </servlet>
+
   <servlet-mapping>
-    <servlet-name>clientServlet</servlet-name>
+    <servlet-name>ClientServlet</servlet-name>
     <url-pattern>/client</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Dispatcher</servlet-name>
+    <url-pattern>/submit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConfirmServlet</servlet-name>
+    <url-pattern>/confirm</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RechargeServlet</servlet-name>
+    <url-pattern>/recharge</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <display-name>client</display-name>
+    <servlet-name>ClientServlet</servlet-name>
+    <servlet-class>com.prog3.servlet.ClientServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>submit</display-name>
+    <servlet-name>Dispatcher</servlet-name>
+    <servlet-class>com.prog3.servlet.Dispatcher</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>confirm</display-name>
+    <servlet-name>ConfirmServlet</servlet-name>
+    <servlet-class>com.prog3.servlet.ConfirmServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>recharge</display-name>
+    <servlet-name>RechargeServlet</servlet-name>
+    <servlet-class>com.prog3.servlet.RechargeServlet</servlet-class>
+  </servlet>
 
 </web-app>
