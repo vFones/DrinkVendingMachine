@@ -1,31 +1,31 @@
 package com.prog3.hibernate.dao;
 
-import com.prog3.hibernate.ormbean.PurchaseBean;
+import com.prog3.hibernate.ormbean.Purchase;
 
 import java.util.List;
 
 /**
  * The type Purchase dao.
  */
-public class PurchaseDao extends GenericDao<PurchaseBean>{
+public class PurchaseDao extends GenericDao<Purchase>{
   /**
    * The constant selectStarFromPurchase.
    */
-  final static String selectStarFromPurchase = "from PurchaseBean";
+  final static String selectStarFromPurchase = "from Purchase";
   @Override
-  public void save(PurchaseBean p){
+  public void save(Purchase p){
     super.save(p);
   }
   @Override
-  public void remove(PurchaseBean p) {
+  public void remove(Purchase p) {
     super.remove(p);
   }
   @Override
-  public void update(PurchaseBean purchaseBean) {
-    super.update(purchaseBean);
+  public void update(Purchase purchase) {
+    super.update(purchase);
   }
 
-  public List<PurchaseBean> query(String s){
+  public List<Purchase> query(String s){
     return super.query(s);
   }
 
@@ -34,7 +34,7 @@ public class PurchaseDao extends GenericDao<PurchaseBean>{
    *
    * @return the all
    */
-  public List<PurchaseBean> getAll() {
+  public List<Purchase> getAll() {
     return super.query(selectStarFromPurchase);
   }
 }

@@ -1,6 +1,6 @@
 package com.prog3.hibernate.dao;
 
-import com.prog3.hibernate.ormbean.ProductBean;
+import com.prog3.hibernate.ormbean.Product;
 
 import java.util.List;
 
@@ -9,22 +9,25 @@ import java.util.List;
  *
  * @author Vittorio Fones
  */
-public class ProductDao extends GenericDao<ProductBean>{
-  private final String selectStarFromProduct = "from ProductBean";
+public class ProductDao extends GenericDao<Product> {
+  private final String selectStarFromProduct = "from Product";
 
   @Override
-  public void save(ProductBean p) {
+  public void save(Product p) {
     super.save(p);
   }
+
   @Override
-  public void remove(ProductBean p) {
+  public void remove(Product p) {
     super.remove(p);
   }
+
   @Override
-  public void update(ProductBean p) {
+  public void update(Product p) {
     super.update(p);
   }
-  public List<ProductBean> query(String s){
+
+  public List<Product> query(String s) {
     return super.query(s);
   }
 
@@ -33,16 +36,8 @@ public class ProductDao extends GenericDao<ProductBean>{
    *
    * @return the list
    */
-  public List<ProductBean> getAll(){
+  public List<Product> getAll() {
     return super.query(selectStarFromProduct);
   }
-
-  //intented for testing queries
-  /*public static void main(String[]args) {
-    ProductDao prod = new ProductDao();
-    List<ProductBean> dio = prod.getAll();
-    for (ProductBean u : dio) {
-      System.out.println(u.getName());
-    }
-  }*/
 }
+

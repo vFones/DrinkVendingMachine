@@ -1,6 +1,6 @@
 package com.prog3.hibernate.dao;
 
-import com.prog3.hibernate.ormbean.KeyBean;
+import com.prog3.hibernate.ormbean.Key;
 
 import java.util.List;
 
@@ -9,26 +9,26 @@ import java.util.List;
  *
  * @author Vittorio Fones
  */
-public class KeyDao extends GenericDao<KeyBean>{
+public class KeyDao extends GenericDao<Key>{
   /**
    * The constant selectStarFrom.
    */
-  final static String selectStarFrom = "from KeyBean";
+  private final static String selectStarFrom = "from Key";
 
   @Override
-  public void save(KeyBean k) {
+  public void save(Key k) {
     super.save(k);
   }
   @Override
-  public void remove(KeyBean k) {
+  public void remove(Key k) {
     super.remove(k);
   }
   @Override
-  public void update(KeyBean k) {
+  public void update(Key k) {
     super.update(k);
   }
 
-  public List<KeyBean> query(String s){
+  public List<Key> query(String s){
     return super.query(s);
   }
 
@@ -37,22 +37,9 @@ public class KeyDao extends GenericDao<KeyBean>{
    *
    * @return the all
    */
-  public List<KeyBean> getAll() {
+  public List getAll() {
     return super.query(selectStarFrom);
   }
 
-}
 
-/*public class UserDao{
-  public static void main(String[]args){
-    GenericDao<User> user = new GenericDao<User>();
-    User toSave = new User();
-    toSave.setUserId(5);
-    toSave.setBalance(32.0F);
-    //user.save(toSave);
-    List<User> dio = user.getAll("from User");
-    for (User u: dio) {
-      System.out.println(u.getBalance());
-    }
-  }
-}*/
+}
