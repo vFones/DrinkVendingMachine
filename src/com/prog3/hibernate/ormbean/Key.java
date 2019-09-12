@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="key")
-public class KeyBean {
+public class Key {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_key")

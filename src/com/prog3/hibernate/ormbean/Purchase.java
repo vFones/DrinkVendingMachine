@@ -11,25 +11,39 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="purchase")
-public class PurchaseBean {
+public class Purchase {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="purchase_id")
   private int purchase_id;
+
   @Column(name="date", nullable = false)
   private Timestamp date;
+
   @OneToOne
   @JoinColumn(name="prod_id", nullable = false)
-  private ProductBean productBean;
+  private Product product;
+
   @Column(name="cash", nullable = false)
   private boolean cash;
-  @Column(name="credit_card", nullable = false)
-  private boolean credit_card;
+
   @Column(name="cc_number")
   private String cc_number;
+
   @OneToOne
   @JoinColumn(name="id_key")
-  private KeyBean keyBean;
+  private Key key;
+
+  public Purchase() {
+  }
+
+  public Purchase(Timestamp date, Product product, boolean cash, String cc_number, Key key) {
+    this.date = date;
+    this.product = product;
+    this.cash = cash;
+    this.cc_number = cc_number;
+    this.key = key;
+  }
 
   /**
    * Gets purchase id.
@@ -70,10 +84,10 @@ public class PurchaseBean {
   /**
    * Sets product bean.
    *
-   * @param productBean the product bean
+   * @param product the product bean
    */
-  public void setProductBean(ProductBean productBean) {
-    this.productBean = productBean;
+  public void setProduct(Product product) {
+    this.product = product;
   }
 
   /**
@@ -81,8 +95,8 @@ public class PurchaseBean {
    *
    * @return the product bean
    */
-  public ProductBean getProductBean() {
-    return productBean;
+  public Product getProduct() {
+    return product;
   }
 
   /**
@@ -101,24 +115,6 @@ public class PurchaseBean {
    */
   public boolean isCash() {
     return cash;
-  }
-
-  /**
-   * Sets credit card.
-   *
-   * @param credit_card the credit card
-   */
-  public void setCredit_card(boolean credit_card) {
-    this.credit_card = credit_card;
-  }
-
-  /**
-   * Is credit card boolean.
-   *
-   * @return the boolean
-   */
-  public boolean isCredit_card() {
-    return credit_card;
   }
 
   /**
@@ -144,16 +140,16 @@ public class PurchaseBean {
    *
    * @return the key bean
    */
-  public KeyBean getKeyBean() {
-    return keyBean;
+  public Key getKey() {
+    return key;
   }
 
   /**
    * Sets key bean.
    *
-   * @param keyBean the key bean
+   * @param key the key bean
    */
-  public void setKeyBean(KeyBean keyBean) {
-    this.keyBean = keyBean;
+  public void setKey(Key key) {
+    this.key = key;
   }
 }
