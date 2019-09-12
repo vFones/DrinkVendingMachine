@@ -1,7 +1,7 @@
-DROP TABLE product CASCADE;
 DROP TABLE purchase CASCADE;
+DROP TABLE product CASCADE;
+DROP TABLE admin CASCADE;
 DROP TABLE key CASCADE;
-
 
 CREATE TABLE product
 (
@@ -23,16 +23,19 @@ CREATE TABLE purchase
   date DATE NOT NULL,
   prod_id INTEGER REFERENCES product(prod_id),
   cash BOOLEAN NOT NULL,
-  credit_card BOOLEAN NOT NULL,
   cc_number VARCHAR(16),
   id_key INTEGER REFERENCES key(id_key),
 
   CHECK (cc_number ~ '\d{16}'),
-  CHECK ( (credit_card IS TRUE) OR (cc_number IS NULL)), -- if true than insert
-  CHECK ( (credit_card IS FALSE) OR (cc_number IS NOT NULL)), -- if false than must be NULL
-  CHECK ( (cash IS TRUE AND credit_card IS FALSE AND id_key IS NULL) OR
-          (cash IS FALSE AND credit_card IS TRUE AND id_key IS NULL) OR
-          (cash IS FALSE AND  credit_card IS FALSE AND id_key IS NOT NULL))
+  CHECK ( (cash IS TRUE AND cc_number IS NULL AND id_key IS NULL) OR
+          (cash IS FALSE AND cc_number IS NOT NULL AND id_key IS NULL) OR
+          (cash IS FALSE AND  cc_number IS NULL AND id_key IS NOT NULL))
 );
 
+CREATE TABLE admin
+(
+  email VARCHAR(50) PRIMARY KEY,
+  password VARCHAR(128) NOT NULL,
 
+  CHECK (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
+);

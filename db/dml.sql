@@ -1,12 +1,15 @@
--- INSERT ON keyBean
+-- INSERT ON KEY
 INSERT INTO key VALUES(DEFAULT, 0);
 INSERT INTO key VALUES(DEFAULT, 10);
 INSERT INTO key VALUES(DEFAULT, 1);
 
--- INSERT ON USER
-INSERT INTO product VALUES(DEFAULT, 0.5, 50.0, 'Coffee');
-INSERT INTO product VALUES(DEFAULT, 0.8, 10.0, 'The');
-INSERT INTO product VALUES(DEFAULT, 1.2, 30.0, 'Milk');
-INSERT INTO product VALUES(DEFAULT, 1.2, 10.0, 'Chamomile');
+-- INSERT IN USER
+INSERT INTO product VALUES(DEFAULT, 0.4, 50.0, 'Coffee');
+INSERT INTO product VALUES(DEFAULT, 0.7, 1.25, 'The');
+INSERT INTO product VALUES(DEFAULT, 1.0, 30.0, 'Milk');
+INSERT INTO product VALUES(DEFAULT, 0.7, 10.0, 'Chamomile');
 INSERT INTO product VALUES(DEFAULT, 1.2, 20.0, 'Hot Chocolate');
-INSERT INTO product VALUES(DEFAULT, 1.2, 30.0, 'Hot Water');
+INSERT INTO product VALUES(DEFAULT, 0.4, 30.0, 'Hot Water');
+
+-- INSERT IN ADMIN
+INSERT INTO admin VALUES ('vittorio.fones@gmail.com' , '97efd99987eaf7c6fe03cf9b314b7e1d');
