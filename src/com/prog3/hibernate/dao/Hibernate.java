@@ -23,22 +23,24 @@ public abstract class Hibernate {
    */
   public void run(){
     Transaction transaction = null;
+    Session session = null;
     try{
       Configuration configuration = new Configuration().configure();
       SessionFactory sessionFactory = configuration.buildSessionFactory();
-      Session session = sessionFactory.openSession();
+      session = sessionFactory.openSession();
       transaction = session.beginTransaction();
+      transaction.setTimeout(3);
 
       dbOperations(session);
 
       transaction.commit();
-      sessionFactory.close();
-
     }catch (Exception e) {
       if (transaction != null) {
         transaction.rollback();
       }
       e.printStackTrace();
+    }finally {
+      session.close();
     }
   }
 }
