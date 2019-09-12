@@ -1,7 +1,7 @@
-package com.prog3.servlet;
+package com.prog3.servlet.client;
 
 import com.prog3.hibernate.dao.KeyDao;
-import com.prog3.hibernate.ormbean.KeyBean;
+import com.prog3.hibernate.ormbean.Key;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,19 +56,19 @@ public class RechargeServlet extends HttpServlet {
     float bill = parseFloat(billString.substring(0, billString.length() - 3));
     int idKey = 0;
 
-    KeyBean keyBean = null;
+    Key key = null;
     if(idKeyString != "" ) {
       idKey = parseInt(idKeyString);
       KeyDao keyDao = new KeyDao();
-      List<KeyBean> keyBeanList = keyDao.query("from KeyBean where id_key=" + idKey);
-      if (keyBeanList == null) {
+      List<Key> keyList = keyDao.query("from Key where id_key=" + idKey);
+      if (keyList == null) {
         req.setAttribute("msg", "No key with that ID...");
       }
       else{
-        keyBean = keyBeanList.get(0);
-        keyBean.setBalance( round(keyBean.getBalance(), 2).floatValue() + bill);
-        keyDao.update(keyBean);
-        req.setAttribute("msg", "Recharge received, key #"+ idKey +" --> balance: "+ round(keyBean.getBalance(), 2) +"...");//keyDao.query("select balance from KeyBean where id_key="+idKey) +"...");
+        key = keyList.get(0);
+        key.setBalance( round(key.getBalance(), 2).floatValue() + bill);
+        keyDao.update(key);
+        req.setAttribute("msg", "Recharge received, key #"+ idKey +" --> balance: "+ round(key.getBalance(), 2) +"...");//keyDao.query("select balance from KeyBean where id_key="+idKey) +"...");
       }
     }
     else{
