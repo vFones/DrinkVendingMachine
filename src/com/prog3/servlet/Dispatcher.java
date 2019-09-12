@@ -39,16 +39,23 @@ public class Dispatcher extends HttpServlet {
     }
     if(req.getParameter("rechargeKey") != null) {
       String key = req.getParameter("keyId");
-      req.setAttribute("keyId", key);
-
       String bill = req.getParameter("bill");
+
+      req.setAttribute("keyId", key);
       req.setAttribute("bill", bill);
 
       RequestDispatcher rd = req.getRequestDispatcher("/recharge");
       rd.forward(req, resp);
     }
     if(req.getParameter("adminSignin") != null){
-      //
+      String email = req.getParameter("email");
+      String password = req.getParameter("password");
+
+      req.setAttribute("email", email);
+      req.setAttribute("password", password);
+
+      RequestDispatcher rd = req.getRequestDispatcher("/signin");
+      rd.forward(req, resp);
     }
   }
 }
