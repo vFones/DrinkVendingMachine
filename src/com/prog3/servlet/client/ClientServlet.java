@@ -1,7 +1,7 @@
-package com.prog3.servlet;
+package com.prog3.servlet.client;
 
 import com.prog3.hibernate.dao.ProductDao;
-import com.prog3.hibernate.ormbean.ProductBean;
+import com.prog3.hibernate.ormbean.Product;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,9 +38,17 @@ public class ClientServlet extends HttpServlet{
   public void doClientServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     ProductDao prod = new ProductDao();
-    List<ProductBean> prod_list = prod.query("from ProductBean order by prod_id");
+    List<Product> prod_list = prod.query("from Product order by prod_id");
 
     req.setAttribute("list", prod_list);
+
+    String alert = (String) req.getAttribute("alert");
+    String err = req.getParameter("err");
+    if(alert == null)
+      alert = "hide";
+    if(err != null)
+      alert = "show";
+    req.setAttribute("alert", alert);
 
     String msg = (String) req.getAttribute("msg");
     if(msg == null)
