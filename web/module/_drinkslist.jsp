@@ -18,10 +18,10 @@
           <th scope="col">Price</th>
         </tr>
       </thead>
-        <c:forEach var="x" items="${list}">
+        <c:forEach var="x" items="${drinkList}">
         <tbody>
           <tr class="clickable-row" >
-            <th scope="row" >
+            <th scope="row">
               <input type="hidden" class="drinkId" name="" value="${x.prod_id}">
               ${x.getProd_id()}
             </th>
