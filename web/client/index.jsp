@@ -10,9 +10,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-
-<jsp:include page="module/_head.jsp"/>
-
+  <head>
+    <jsp:include page="../module/_head.jsp"/>
+  </head>
 <body>
   <div class="container col-2">
   </div>
@@ -41,13 +41,13 @@
       <br>
       <!--Table of drinks-->
       <div class="container col">
-        <jsp:include page="module/_drinkslist.jsp"/>
+        <jsp:include page="../module/_drinkslist.jsp"/>
       </div>
       <br>
       <!--Display and buttons-->
       <div class="container col">
-        <jsp:include page="module/_display.jsp"/>
-        <jsp:include page="module/_buttons.jsp"/>
+        <jsp:include page="../module/_display.jsp"/>
+        <jsp:include page="../module/_buttons.jsp"/>
       </div>
     </form>
   </div>
@@ -77,7 +77,7 @@
   </div>
   <div class="container col-2"></div>
 
-  <jsp:include page="module/_scripts.jsp"/>
+  <jsp:include page="../module/_scripts.jsp" />
 
 </body>
 </html>

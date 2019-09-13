@@ -3,12 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
-
   <filter-mapping>
     <filter-name>signInFilter</filter-name>
-    <servlet-name>SignInServlet</servlet-name>
-    <url-pattern>/admin</url-pattern>
+    <servlet-name>AdminServlet</servlet-name>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
@@ -24,6 +21,10 @@
     <url-pattern>/client</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>Dispatcher</servlet-name>
     <url-pattern>/submit</url-pattern>
   </servlet-mapping>
@@ -35,15 +36,16 @@
     <servlet-name>RechargeServlet</servlet-name>
     <url-pattern>/recharge</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>SignInServlet</servlet-name>
-    <url-pattern>/signin</url-pattern>
-  </servlet-mapping>
 
   <servlet>
     <display-name>client</display-name>
     <servlet-name>ClientServlet</servlet-name>
     <servlet-class>com.prog3.servlet.client.ClientServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>admin</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>com.prog3.servlet.admin.AdminServlet</servlet-class>
   </servlet>
   <servlet>
     <display-name>submit</display-name>
@@ -60,10 +62,4 @@
     <servlet-name>RechargeServlet</servlet-name>
     <servlet-class>com.prog3.servlet.client.RechargeServlet</servlet-class>
   </servlet>
-  <servlet>
-    <display-name>signin</display-name>
-    <servlet-name>SignInServlet</servlet-name>
-    <servlet-class>com.prog3.servlet.admin.SignInServlet</servlet-class>
-  </servlet>
-
 </web-app>
