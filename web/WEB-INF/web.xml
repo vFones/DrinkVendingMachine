@@ -5,7 +5,7 @@
          version="4.0">
   <filter-mapping>
     <filter-name>signInFilter</filter-name>
-    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin/*</url-pattern>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>

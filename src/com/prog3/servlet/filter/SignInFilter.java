@@ -44,11 +44,12 @@ public class SignInFilter implements Filter {
     String err = "";
 
     if (admin == null) {
-      if(request.getRequestURI().endsWith("/admin"))
-        err = "?err=\"true\"";
+      err = "?err=\"true\"";
       response.sendRedirect(request.getContextPath() + "/client"+err); // No logged-in user found, so redirect to login page.
     } else {
-      request.setAttribute("loggedUser", "admin");
+      request.setAttribute("loggedUser", admin.getEmail());
+      request.setAttribute("email", email);
+      request.setAttribute("password", password);
       chain.doFilter(request, response); // Logged-in user found, so just continue request.
     }
   }
