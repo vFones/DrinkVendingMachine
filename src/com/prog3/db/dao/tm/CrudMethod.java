@@ -1,26 +1,28 @@
-package com.prog3.hibernate.dao;
+package com.prog3.db.dao.tm;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-/**
- * Create db connection every time need to perform a dbOperations
- *
- * @author Vittorio Fones
- */
-public abstract class Hibernate {
-  /**
-   * Need to implement db operations
-   *
-   * @param session the session
-   */
+import java.util.List;
+
+abstract class CrudMethod<T> {
+  private List<T> list;
   public abstract void dbOperations(Session session);
 
-  /**
-   * Run.
-   */
+  public void setList(List<T> list) {
+    this.list = list;
+  }
+
+  public List<T> getList() { return list;
+  }
+  public T getT() {
+    if(list.size() >0 )
+      return list.get(0);
+    return null;
+  }
+
   public void run(){
     Transaction transaction = null;
     Session session = null;
@@ -34,12 +36,12 @@ public abstract class Hibernate {
       dbOperations(session);
 
       transaction.commit();
-    }catch (Exception e) {
+    } catch (Exception e) {
       if (transaction != null) {
         transaction.rollback();
       }
       e.printStackTrace();
-    }finally {
+    } finally {
       session.close();
     }
   }
