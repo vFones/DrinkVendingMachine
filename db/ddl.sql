@@ -20,7 +20,7 @@ CREATE TABLE key
 CREATE TABLE purchase
 (
   purchase_id SERIAL PRIMARY KEY,
-  date DATE NOT NULL,
+  date TIMESTAMP NOT NULL,
   prod_id INTEGER REFERENCES product(prod_id),
   cash BOOLEAN NOT NULL,
   cc_number VARCHAR(16),

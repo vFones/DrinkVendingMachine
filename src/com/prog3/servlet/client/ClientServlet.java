@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * The type Client servlet.
@@ -37,18 +36,16 @@ public class ClientServlet extends HttpServlet{
    */
   public void doClientServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    GenericDao<Product> productDao = new GenericDao<Product>("from Product order by prod_id");
-    List<Product> prod_list = productDao.getAll();
-
-    req.setAttribute("list", prod_list);
+    req.setAttribute("drinkList",new GenericDao<Product>("from Product order by prod_id").getAll());
 
     String alert = (String) req.getAttribute("alert");
-    String err = req.getParameter("err");
     if(alert == null)
       alert = "hide";
+    req.setAttribute("alert", alert);
+
+    String err = req.getParameter("err");
     if(err != null)
       alert = "show";
-    req.setAttribute("alert", alert);
 
     String msg = (String) req.getAttribute("msg");
     if(msg == null)

@@ -2,6 +2,7 @@ package com.prog3.db.ormbean;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Purchase.java
@@ -18,7 +19,8 @@ public class Purchase {
   private int purchase_id;
 
   @Column(name="date", nullable = false)
-  private Timestamp date;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date date;
 
   @OneToOne
   @JoinColumn(name="prod_id", nullable = false)
@@ -37,7 +39,7 @@ public class Purchase {
   public Purchase() {
   }
 
-  public Purchase(Timestamp date, Product product, boolean cash, String cc_number, Key key) {
+  public Purchase(Date date, Product product, boolean cash, String cc_number, Key key) {
     this.date = date;
     this.product = product;
     this.cash = cash;
@@ -77,7 +79,7 @@ public class Purchase {
    *
    * @return the date
    */
-  public Timestamp getDate() {
+  public Date getDate() {
     return date;
   }
 

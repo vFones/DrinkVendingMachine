@@ -7,6 +7,7 @@ import com.prog3.db.ormbean.Purchase;
 import com.prog3.servlet.client.cor.Payment;
 import com.prog3.servlet.client.cor.PaymentChain;
 import com.prog3.servlet.client.cor.PaymentType;
+import com.prog3.util.Float2;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,8 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -26,19 +26,6 @@ import static java.lang.Integer.parseInt;
 public class ConfirmServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  /**
-   * Round big decimal.
-   *
-   * @param d            the d
-   * @param decimalPlace the decimal place
-   * @return the big decimal
-   */
-  public static BigDecimal round(float d, int decimalPlace) {
-    BigDecimal bd = new BigDecimal(Float.toString(d));
-    bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-    return bd;
-  }
-
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,7 +33,7 @@ public class ConfirmServlet extends HttpServlet {
     String keyId = null;
     String ccId = null;
 
-    Timestamp date = new Timestamp(System.currentTimeMillis());
+    Date date = new Date();
 
     GenericDao<Product> productDao = new GenericDao<Product>();
     Product prod = new Product();
@@ -71,7 +58,7 @@ public class ConfirmServlet extends HttpServlet {
     }
     else{
       prod = productDao.queryBean("from Product where prod_id=" + drinkValue);
-      stockDiff = round(prod.getStock(),2 ).floatValue() - 0.25F;
+      stockDiff = Float2.round(prod.getStock(),2 ).floatValue() - 0.25F;
     }
 
     if(stockDiff < 1) {
@@ -121,7 +108,7 @@ public class ConfirmServlet extends HttpServlet {
             break;
           case KEY:
             if(key != null)
-              req.setAttribute("msg", "Payment rejected, balance on key #" + keyId + ": " + round(key.getBalance(), 2) + "...");
+              req.setAttribute("msg", "Payment rejected, balance on key #" + keyId + ": " + Float2.round(key.getBalance(), 2) + "...");
             break;
           default:
             throw new IllegalStateException("Unexpected value: " + payment.getType());
