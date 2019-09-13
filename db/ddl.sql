@@ -34,7 +34,8 @@ CREATE TABLE purchase
 
 CREATE TABLE admin
 (
-  email VARCHAR(50) PRIMARY KEY,
+  admin_id SERIAL PRIMARY KEY,
+  email VARCHAR(50) NOT NULL,
   password VARCHAR(128) NOT NULL,
 
   CHECK (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')

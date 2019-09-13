@@ -12,4 +12,4 @@ INSERT INTO product VALUES(DEFAULT, 1.2, 20.0, 'Hot Chocolate');
 INSERT INTO product VALUES(DEFAULT, 0.4, 30.0, 'Hot Water');
 
 -- INSERT IN ADMIN
-INSERT INTO admin VALUES ('vittorio.fones@gmail.com' , '97efd99987eaf7c6fe03cf9b314b7e1d');
+INSERT INTO admin VALUES (DEFAULT, 'vittorio.fones@gmail.com' , '97efd99987eaf7c6fe03cf9b314b7e1d');
