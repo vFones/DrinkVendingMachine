@@ -54,7 +54,7 @@ public class Dispatcher extends HttpServlet {
       req.setAttribute("email", email);
       req.setAttribute("password", password);
 
-      RequestDispatcher rd = req.getRequestDispatcher("/signin");
+      RequestDispatcher rd = req.getRequestDispatcher("/admin");
       rd.forward(req, resp);
     }
   }

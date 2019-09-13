@@ -1,9 +1,8 @@
 package com.prog3.servlet.client.cor;
 
-import com.prog3.hibernate.ormbean.Purchase;
+import com.prog3.db.ormbean.Purchase;
 
 public class Payment {
-  public enum PaymentType{ KEY, CASH, CC }
   private PaymentType type;
   private Float coins;
   private boolean paid;

@@ -1,5 +1,7 @@
 package com.prog3.servlet.client.cor;
 
+import static com.prog3.servlet.client.cor.PaymentType.CC;
+
 public class CcPayment extends RequestHandler {
 
   public CcPayment(RequestHandler r) {
@@ -12,7 +14,7 @@ public class CcPayment extends RequestHandler {
     if(  ccNumber != null ){
       if( !ccNumber.equals("") ) {
         p.setPaid(true);
-        p.setType(Payment.PaymentType.CC);
+        p.setType(CC);
         p.getPurchase().setCc_number(ccNumber);
 
         p.getPurchase().setCash(false);
@@ -23,20 +25,3 @@ public class CcPayment extends RequestHandler {
     }
   }
 }
-    /*
-    if (p.getCcNumber() != null) {
-      if (!p.getCcNumber().equals("")) {
-        p.setPaid(true);
-        Timestamp date = new Timestamp(System.currentTimeMillis());
-        PurchaseBean purchase = new PurchaseBean(date, p.getProduct(), false, true, p.getCcNumber(), null);
-        p.setPurchase(purchase);
-        p.setTypology("cc");
-      }
-    }
-    else {
-      p.setPaid(false);
-      super.handlePayment(p);
-    }
-  }
-}
-*/

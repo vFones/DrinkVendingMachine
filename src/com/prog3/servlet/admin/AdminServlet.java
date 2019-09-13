@@ -1,27 +1,38 @@
 package com.prog3.servlet.admin;
 
+import com.prog3.db.dao.GenericDao;
+import com.prog3.db.ormbean.Product;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-public class SignInServlet extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+public class AdminServlet extends HttpServlet {
 
-
-  protected void doSignIn(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     RequestDispatcher rd = null;
     String filtered = (String) req.getAttribute("loggedUser");
 
-    if(filtered != null){
-      rd = req.getRequestDispatcher("/admin");
-    }
-    else{
+    if (filtered != null) {
+      GenericDao<Product> productDao = new GenericDao<Product>("from Product order by prod_id");
+      List<Product> prod_list = productDao.getAll();
+      req.setAttribute("list", prod_list);
+
+      System.out.println("Succefful loginnn signinservlet filteredd");
+      rd = this.getServletContext().getRequestDispatcher("/admin/index.jsp");
+
+
+
+
+    } else {
       req.setAttribute("alert", "show");
       rd = req.getRequestDispatcher("/client");
+      rd.forward(req, resp);
     }
     rd.forward(req, resp);
   }
@@ -33,6 +44,6 @@ public class SignInServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    doSignIn(req, resp);
+    doAdmin(req, resp);
   }
 }

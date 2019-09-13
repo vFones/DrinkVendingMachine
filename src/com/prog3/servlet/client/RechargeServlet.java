@@ -1,7 +1,7 @@
 package com.prog3.servlet.client;
 
-import com.prog3.hibernate.dao.KeyDao;
-import com.prog3.hibernate.ormbean.Key;
+import com.prog3.db.dao.GenericDao;
+import com.prog3.db.ormbean.Key;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.List;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -59,13 +58,13 @@ public class RechargeServlet extends HttpServlet {
     Key key = null;
     if(idKeyString != "" ) {
       idKey = parseInt(idKeyString);
-      KeyDao keyDao = new KeyDao();
-      List<Key> keyList = keyDao.query("from Key where id_key=" + idKey);
-      if (keyList == null) {
+      GenericDao<Key> keyDao = new GenericDao<Key>("from Key");
+
+      key = keyDao.queryBean("from Key where id_key=" + idKey);
+      if (key == null) {
         req.setAttribute("msg", "No key with that ID...");
       }
       else{
-        key = keyList.get(0);
         key.setBalance( round(key.getBalance(), 2).floatValue() + bill);
         keyDao.update(key);
         req.setAttribute("msg", "Recharge received, key #"+ idKey +" --> balance: "+ round(key.getBalance(), 2) +"...");//keyDao.query("select balance from KeyBean where id_key="+idKey) +"...");

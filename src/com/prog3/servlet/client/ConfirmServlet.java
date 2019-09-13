@@ -1,12 +1,12 @@
 package com.prog3.servlet.client;
 
-import com.prog3.hibernate.dao.KeyDao;
-import com.prog3.hibernate.dao.ProductDao;
-import com.prog3.hibernate.dao.PurchaseDao;
-import com.prog3.hibernate.ormbean.Key;
-import com.prog3.hibernate.ormbean.Product;
-import com.prog3.hibernate.ormbean.Purchase;
-import com.prog3.servlet.client.cor.*;
+import com.prog3.db.dao.GenericDao;
+import com.prog3.db.ormbean.Key;
+import com.prog3.db.ormbean.Product;
+import com.prog3.db.ormbean.Purchase;
+import com.prog3.servlet.client.cor.Payment;
+import com.prog3.servlet.client.cor.PaymentChain;
+import com.prog3.servlet.client.cor.PaymentType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -49,7 +48,7 @@ public class ConfirmServlet extends HttpServlet {
 
     Timestamp date = new Timestamp(System.currentTimeMillis());
 
-    ProductDao productDao = new ProductDao();
+    GenericDao<Product> productDao = new GenericDao<Product>();
     Product prod = new Product();
     Purchase purchase = null;
     Key key = null;
@@ -71,8 +70,7 @@ public class ConfirmServlet extends HttpServlet {
       err = true;
     }
     else{
-      List<Product> prod_list = productDao.query("from Product where prod_id=" + drinkValue);
-      prod = prod_list.get(0);
+      prod = productDao.queryBean("from Product where prod_id=" + drinkValue);
       stockDiff = round(prod.getStock(),2 ).floatValue() - 0.25F;
     }
 
@@ -89,24 +87,22 @@ public class ConfirmServlet extends HttpServlet {
       err = true;
     }
     else {
-      List<Key> keyList = null;
       if(keyId != null) {
         if (!keyId.equals("")) {
-          keyList = new KeyDao().query("from Key where id_key=" + parseInt(keyId));
-          if(keyList != null && keyList.size() > 0) {
-            key = keyList.get(0);
+          key = new GenericDao<Key>().queryBean("from Key where id_key=" + parseInt(keyId));
+          if(key != null) {
             purchase.setKey(key);
           }
         }
       }
 
-      if(ccId != null){
-        if(!ccId.equals("")){
+      if(ccId != null) {
+        if(!ccId.equals("")) {
           purchase.setCc_number(ccId.toString());
         }
       }
 
-      if(coins > 0.0){
+      if(coins > 0.0) {
         purchase.setCash(true);
       }
 
@@ -114,7 +110,7 @@ public class ConfirmServlet extends HttpServlet {
       paymentChain.makeRequest(payment);
 
       //handle result from payment
-      Payment.PaymentType paymentType = payment.getType();
+      PaymentType paymentType = payment.getType();
 
       if ( !payment.isPaid() && paymentType != null) {
         err = true;
@@ -124,8 +120,8 @@ public class ConfirmServlet extends HttpServlet {
             req.setAttribute("coins", coins.toString());
             break;
           case KEY:
-            if(keyList != null && keyList.size() > 0)
-              req.setAttribute("msg", "Payment rejected, balance on key #" + keyId + ": " + round(keyList.get(0).getBalance(), 2) + "...");
+            if(key != null)
+              req.setAttribute("msg", "Payment rejected, balance on key #" + keyId + ": " + round(key.getBalance(), 2) + "...");
             break;
           default:
             throw new IllegalStateException("Unexpected value: " + payment.getType());
@@ -133,11 +129,11 @@ public class ConfirmServlet extends HttpServlet {
       }
     }
 
-    if(!err){
+    if(!err) {
       prod.setStock(stockDiff);
       productDao.update(prod);
 
-      new PurchaseDao().save(payment.getPurchase());
+      new GenericDao<Purchase>().save(payment.getPurchase());
 
       req.setAttribute("msg", "Payment received, delivering...");
       req.setAttribute("coins", "0.0");
