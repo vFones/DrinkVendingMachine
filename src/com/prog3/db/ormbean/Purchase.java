@@ -1,4 +1,4 @@
-package com.prog3.hibernate.ormbean;
+package com.prog3.db.ormbean;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
