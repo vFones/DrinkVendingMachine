@@ -19,7 +19,8 @@
         </tr>
       </thead>
         <c:forEach var="x" items="${drinkList}">
-        <tbody>
+          <c:if test="${x.getStock() > 1}">
+          <tbody>
           <tr class="clickable-row" >
             <th scope="row">
               <input type="hidden" class="drinkId" name="" value="${x.prod_id}">
@@ -28,7 +29,8 @@
             <td>${x.getName()}</td>
             <td>${x.getPrice()}</td>
           </tr>
-        </tbody>
+          </tbody>
+          </c:if>
         </c:forEach>
     </table>
   </div>
