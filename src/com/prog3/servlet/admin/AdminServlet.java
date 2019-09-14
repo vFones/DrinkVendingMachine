@@ -1,34 +1,37 @@
 package com.prog3.servlet.admin;
 
+import com.prog3.db.dao.GenericDao;
+import com.prog3.db.ormbean.Product;
+import com.prog3.db.ormbean.Purchase;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet(displayName = "admin", urlPatterns = "/admin")
 public class AdminServlet extends HttpServlet {
   protected void doAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    //String loggedUser =  (String) req.getAttribute("loggedUser");
-    RequestDispatcher rd = null;
-    //if(loggedUser != null) {
 
-    AdminControl.adminControl(req, resp);
+    String err = (String) req.getAttribute("err");
+    if(err == null)
+      req.setAttribute("err", "hide");
 
-    rd = req.getRequestDispatcher("/admin/index.jsp");
+    if(true/**/) {
+      req.setAttribute("purchaseList", new GenericDao<Purchase>("from Purchase").getAll());
+    }
+    req.setAttribute("drinkList",  new GenericDao<Product>("from Product order by prod_id").getAll());
 
-    /*}
-    else {
-      String err = "?err=\"true\"";
-      rd = req.getRequestDispatcher("/client"+err);
-    }*/
-
+    RequestDispatcher rd = req.getRequestDispatcher("/admin/index.jsp");
     rd.forward(req, resp);
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.doGet(req, resp);
+    doAdmin(req, resp);
   }
 
   @Override
