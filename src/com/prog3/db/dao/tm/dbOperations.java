@@ -3,9 +3,9 @@ package com.prog3.db.dao.tm;
 import java.util.List;
 
 public class dbOperations<T> {
-  private CrudMethod<T> crudMethod;
+  private ACrudMethod<T> crudMethod;
 
-  public dbOperations(CrudMethod<T> crudMethod){
+  public dbOperations(ACrudMethod<T> crudMethod){
     this.crudMethod = crudMethod;
   }
 
@@ -13,7 +13,7 @@ public class dbOperations<T> {
     crudMethod.run();
   }
 
-  public void changeMethod(CrudMethod<T> crudMethod){
+  public void changeMethod(ACrudMethod<T> crudMethod){
     this.crudMethod = crudMethod;
   }
 

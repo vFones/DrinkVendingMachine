@@ -22,6 +22,15 @@ public class Product {
   @Column(name="name", unique = true, nullable = false)
   private String name;
 
+  public Product() {
+  }
+
+  public Product(float price, float stock, String name) {
+    this.price = price;
+    this.stock = stock;
+    this.name = name;
+  }
+
   /**
    * Gets price.
    *

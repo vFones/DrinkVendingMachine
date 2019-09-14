@@ -2,7 +2,7 @@ package com.prog3.db.dao.tm;
 
 import org.hibernate.Session;
 
-public class RetrieveMethod<T> extends CrudMethod<T> {
+public class RetrieveMethod<T> extends ACrudMethod<T> {
   private String query;
 
   public RetrieveMethod(String query) {

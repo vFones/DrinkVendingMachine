@@ -2,7 +2,7 @@ package com.prog3.db.dao.tm;
 
 import org.hibernate.Session;
 
-public class CreateMethod<T> extends CrudMethod<T> {
+public class CreateMethod<T> extends ACrudMethod<T> {
   private T t;
 
   public CreateMethod(T t){

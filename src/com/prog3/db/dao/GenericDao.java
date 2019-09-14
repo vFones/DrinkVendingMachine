@@ -25,11 +25,6 @@ public class GenericDao<T> {
     dbOperation.run();
   }
 
-  public void remove(T t) {
-    dbOperations<T> dbOperation = new dbOperations<T>(new DeleteMethod<T>(t));
-    dbOperation.run();
-  }
-
 
   public void update(T t) {
     dbOperations<T> dbOperation = new dbOperations<T>(new UpdateMethod<T>(t));

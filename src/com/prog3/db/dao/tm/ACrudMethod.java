@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
-abstract class CrudMethod<T> {
+abstract class ACrudMethod<T> {
   private List<T> list;
   public abstract void dbOperations(Session session);
 
