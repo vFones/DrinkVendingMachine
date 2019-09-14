@@ -5,50 +5,20 @@ import com.prog3.db.ormbean.Key;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
+import static com.prog3.util.Float2.round;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
-/**
- * The type Recharge servlet.
- */
+
+@WebServlet(displayName = "recharge", urlPatterns = "/recharge")
 public class RechargeServlet extends HttpServlet {
-  private static final long serialVersionUID = 1L;
-  private static DecimalFormat df = new DecimalFormat("0.00");
 
-  /**
-   * Round big decimal.
-   *
-   * @param d            the d
-   * @param decimalPlace the decimal place
-   * @return the big decimal
-   */
-  public static BigDecimal round(float d, int decimalPlace) {
-    BigDecimal bd = new BigDecimal(Float.toString(d));
-    bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-    return bd;
-  }
-
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    doRecharge(req, resp);
-  }
-
-  /**
-   * Do recharge.
-   *
-   * @param req  the req
-   * @param resp the resp
-   * @throws ServletException the servlet exception
-   * @throws IOException      the io exception
-   */
   protected void doRecharge(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String idKeyString = req.getParameter("keyId");
     String billString = req.getParameter("bill");
@@ -78,4 +48,15 @@ public class RechargeServlet extends HttpServlet {
     RequestDispatcher rd = req.getRequestDispatcher("/client");
     rd.forward(req, resp);
   }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    super.doGet(req, resp);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    doRecharge(req, resp);
+  }
+
 }

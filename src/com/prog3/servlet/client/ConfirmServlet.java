@@ -6,11 +6,12 @@ import com.prog3.db.ormbean.Product;
 import com.prog3.db.ormbean.Purchase;
 import com.prog3.servlet.client.cor.Payment;
 import com.prog3.servlet.client.cor.PaymentChain;
-import com.prog3.servlet.client.cor.PaymentType;
+import com.prog3.servlet.client.cor.EPaymentType;
 import com.prog3.util.Float2;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,29 +24,23 @@ import static java.lang.Integer.parseInt;
 /**
  * The type Confirm servlet.
  */
+@WebServlet(displayName = "confirm", urlPatterns = "/confirm")
 public class ConfirmServlet extends HttpServlet {
-  private static final long serialVersionUID = 1L;
-
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     boolean err = false;
-    String keyId = null;
-    String ccId = null;
 
     Date date = new Date();
 
     GenericDao<Product> productDao = new GenericDao<Product>();
     Product prod = new Product();
-    Purchase purchase = null;
     Key key = null;
 
     //Chain of Responsibility
-    PaymentChain paymentChain = new PaymentChain();
-    Payment payment = null;
 
-    keyId = req.getParameter("keyId");
-    ccId = req.getParameter("ccId");
+    String keyId = req.getParameter("keyId");
+    String ccId = req.getParameter("ccId");
 
     Float coins = parseFloat( req.getParameter("coins") );
 
@@ -67,7 +62,8 @@ public class ConfirmServlet extends HttpServlet {
       err = true;
     }
 
-    purchase = new Purchase(date, prod, false, null, null);
+    Purchase purchase = new Purchase(date, prod, false, null, null);
+    Payment payment = null;
 
     if(coins == 0.0 && keyId.equals("") && ccId.equals("")) {
       req.setAttribute("msg", "No payment selected...");
@@ -94,10 +90,10 @@ public class ConfirmServlet extends HttpServlet {
       }
 
       payment = new Payment(coins, false, purchase);
-      paymentChain.makeRequest(payment);
+      new PaymentChain().makeRequest(payment);
 
       //handle result from payment
-      PaymentType paymentType = payment.getType();
+      EPaymentType paymentType = payment.getType();
 
       if ( !payment.isPaid() && paymentType != null) {
         err = true;
