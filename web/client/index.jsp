@@ -53,7 +53,10 @@
   </div>
 
   <!-- instructions -->
-  <div class="container col-3">
+  <div class="container col-3 align-self-center">
+    <div class="alert alert-danger alert-dismissible fade ${alert}" role="alert">
+      Error: email or password wrong!
+    </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">1) Select sugar quantity within the slider</li>
       <li class="list-group-item">2) Select drink from the list</li>
@@ -62,17 +65,14 @@
     </ul>
     <br>
     <!-- admin log in -->
-    <form class="col-6 text-center mx-auto" action="submit" method="post">
+    <form class="col-6 text-center mx-auto" action="log_in" method="post">
       <div class="form-group">
-        <div class="alert alert-danger alert-dismissible fade ${alert}" role="alert">
-          Error: email or password wrong!
-        </div>
         <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
       </div>
       <div class="form-group">
         <input type="password" class="form-control" name="password" placeholder="Password">
       </div>
-      <button type="submit" name="adminSignin" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
   <div class="container col-2"></div>
