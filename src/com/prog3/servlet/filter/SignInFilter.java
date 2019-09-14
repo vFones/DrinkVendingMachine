@@ -1,11 +1,8 @@
 package com.prog3.servlet.filter;
 
-
-import com.prog3.db.dao.GenericDao;
-import com.prog3.db.ormbean.Admin;
-import com.prog3.util.Hash;
-
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,19 +10,8 @@ import java.io.IOException;
 /**
  * The type Sign in filter.
  */
+@WebFilter(filterName = "SignIn", urlPatterns = "/admin/*", dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE})
 public class SignInFilter implements Filter {
-
-  private Admin correctLogin(String email, String password){
-    if(email != null && password != null) {
-      Admin admin = new GenericDao<Admin>("from Admin").queryBean("from Admin where email='" + email +
-          "' AND password='" + new Hash().md5Hash(password) + "'");
-      if (admin != null) {
-        return admin;
-      }
-    }
-    return null;
-  }
-
   @Override
   public void init(FilterConfig config) throws ServletException {
     // If you have any <init-param> in web.xml, then you could get them
@@ -37,20 +23,21 @@ public class SignInFilter implements Filter {
     HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response = (HttpServletResponse) res;
 
-    String email = request.getParameter("email");
-    String password = request.getParameter("password");
+    Cookie[] cookies = request.getCookies();
+    Cookie cookieLogIn = null;
+    if(cookies != null) {
+      for (Cookie c : cookies) {
+        if (c.getName().equals("admin")) {
+          cookieLogIn = c;
+          break;
+        }
+      }
+    }
 
-    Admin admin = correctLogin(email, password);
-    String err = "";
-
-    if (admin == null) {
-      err = "?err=\"true\"";
-      response.sendRedirect(request.getContextPath() + "/client"+err); // No logged-in user found, so redirect to login page.
+    if (cookieLogIn == null) {
+      req.getRequestDispatcher("/client"+"?err=\"true\"").include(req, res);
     } else {
-      request.setAttribute("loggedUser", admin.getEmail());
-      request.setAttribute("email", email);
-      request.setAttribute("password", password);
-      chain.doFilter(request, response); // Logged-in user found, so just continue request.
+      chain.doFilter(req, res); // Logged-in user found, so just continue request.
     }
   }
 

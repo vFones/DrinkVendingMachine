@@ -2,6 +2,7 @@ package com.prog3.servlet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import java.util.Enumeration;
 /**
  * The type Dispatcher.
  */
+@WebServlet(displayName = "dispatcher", urlPatterns = "/submit")
 public class Dispatcher extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -45,16 +47,6 @@ public class Dispatcher extends HttpServlet {
       req.setAttribute("bill", bill);
 
       RequestDispatcher rd = req.getRequestDispatcher("/recharge");
-      rd.forward(req, resp);
-    }
-    if(req.getParameter("adminSignin") != null){
-      String email = req.getParameter("email");
-      String password = req.getParameter("password");
-
-      req.setAttribute("email", email);
-      req.setAttribute("password", password);
-
-      RequestDispatcher rd = req.getRequestDispatcher("/admin");
       rd.forward(req, resp);
     }
   }
