@@ -1,10 +1,10 @@
 package com.prog3.servlet.client.cor;
 
-import static com.prog3.servlet.client.cor.PaymentType.CC;
+import static com.prog3.servlet.client.cor.EPaymentType.CC;
 
-public class CcPayment extends RequestHandler {
+public class CcPayment extends ARequestHandler {
 
-  public CcPayment(RequestHandler r) {
+  public CcPayment(ARequestHandler r) {
     super(r);
   }
 

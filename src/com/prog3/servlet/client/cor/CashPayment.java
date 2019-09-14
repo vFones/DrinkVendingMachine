@@ -1,10 +1,10 @@
 package com.prog3.servlet.client.cor;
 
-import static com.prog3.servlet.client.cor.PaymentType.CASH;
+import static com.prog3.servlet.client.cor.EPaymentType.CASH;
 
-public class CashPayment extends RequestHandler {
+public class CashPayment extends ARequestHandler {
 
-  public CashPayment(RequestHandler r) {
+  public CashPayment(ARequestHandler r) {
     super(r);
   }
 

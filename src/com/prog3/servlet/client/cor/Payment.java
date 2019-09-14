@@ -3,7 +3,7 @@ package com.prog3.servlet.client.cor;
 import com.prog3.db.ormbean.Purchase;
 
 public class Payment {
-  private PaymentType type;
+  private EPaymentType type;
   private Float coins;
   private boolean paid;
   private Purchase purchase;
@@ -32,11 +32,11 @@ public class Payment {
     this.paid = paid;
   }
 
-  public PaymentType getType() {
+  public EPaymentType getType() {
     return type;
   }
 
-  public void setType(PaymentType type) {
+  public void setType(EPaymentType type) {
     this.type = type;
   }
 

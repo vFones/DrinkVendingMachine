@@ -1,9 +1,9 @@
 package com.prog3.servlet.client.cor;
 
-abstract public class RequestHandler {
-  private RequestHandler next;
+abstract public class ARequestHandler {
+  private ARequestHandler next;
 
-  public RequestHandler(RequestHandler successor) {
+  public ARequestHandler(ARequestHandler successor) {
     this.next = successor;
   }
 

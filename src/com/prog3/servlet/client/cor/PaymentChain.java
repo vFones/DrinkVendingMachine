@@ -1,7 +1,7 @@
 package com.prog3.servlet.client.cor;
 
 public class PaymentChain {
-  RequestHandler chain;
+  ARequestHandler chain;
 
   public PaymentChain(){
     buildChain();

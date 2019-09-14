@@ -4,11 +4,11 @@ import com.prog3.db.dao.GenericDao;
 import com.prog3.db.ormbean.Key;
 import com.prog3.db.ormbean.Product;
 
-import static com.prog3.servlet.client.cor.PaymentType.KEY;
+import static com.prog3.servlet.client.cor.EPaymentType.KEY;
 
-public class KeyPayment extends RequestHandler {
+public class KeyPayment extends ARequestHandler {
 
-  public KeyPayment(RequestHandler r) {
+  public KeyPayment(ARequestHandler r) {
     super(r);
   }
 
