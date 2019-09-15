@@ -18,6 +18,14 @@ public class Key {
   @Column(name="balance", nullable = false)
   private float balance;
 
+  public Key() {
+  }
+
+  public Key(float balance) {
+    this.balance = balance;
+  }
+
+
   /**
    * Gets id key.
    *
