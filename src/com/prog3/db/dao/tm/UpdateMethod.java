@@ -18,6 +18,10 @@ public class UpdateMethod<T> extends ACrudMethod<T> {
   public UpdateMethod(T t){
     this.t = t;
   }
+
+  /**
+   * @param session the session
+   */
   @Override
   public void dbOperations(Session session) {
     session.update(t);

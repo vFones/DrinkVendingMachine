@@ -19,6 +19,9 @@ public class RetrieveMethod<T> extends ACrudMethod<T> {
     this.query = query;
   }
 
+  /**
+   * @param session session
+   */
   @Override
   public void dbOperations(Session session) {
     super.setList(session.createQuery(query).list());

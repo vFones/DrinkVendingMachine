@@ -1,9 +1,9 @@
 package com.prog3.db.dao.tm;
 
+import com.prog3.db.dao.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
@@ -57,8 +57,7 @@ abstract class ACrudMethod<T> {
     Transaction transaction = null;
     Session session = null;
     try{
-      Configuration configuration = new Configuration().configure();
-      SessionFactory sessionFactory = configuration.buildSessionFactory();
+      SessionFactory sessionFactory = Hibernate.getSessionFactory();
       session = sessionFactory.openSession();
       transaction = session.beginTransaction();
       transaction.setTimeout(3);

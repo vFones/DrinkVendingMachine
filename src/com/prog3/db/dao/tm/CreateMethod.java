@@ -19,6 +19,9 @@ public class CreateMethod<T> extends ACrudMethod<T> {
     this.t = t;
   }
 
+  /**
+   * @param session the session
+   */
   @Override
   public void dbOperations(Session session) {
     session.save(t);
