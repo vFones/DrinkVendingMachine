@@ -41,13 +41,13 @@
       <br>
       <!--Table of drinks-->
       <div class="container col">
-        <jsp:include page="../module/_drinkslist.jsp"/>
+        <jsp:include page="module/_drinkslist.jsp"/>
       </div>
       <br>
       <!--Display and buttons-->
       <div class="container col">
-        <jsp:include page="../module/_display.jsp"/>
-        <jsp:include page="../module/_buttons.jsp"/>
+        <jsp:include page="module/_display.jsp"/>
+        <jsp:include page="module/_buttons.jsp"/>
       </div>
     </form>
   </div>
