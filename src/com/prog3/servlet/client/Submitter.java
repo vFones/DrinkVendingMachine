@@ -14,22 +14,7 @@ import java.util.Enumeration;
  */
 @WebServlet(displayName = "dispatcher", urlPatterns = "/submit")
 public class Submitter extends HttpServlet {
-  private static final long serialVersionUID = 1L;
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    doDispatch(req, resp);
-  }
-
-  /**
-   * Do dispatch.
-   *
-   * @param req  the req
-   * @param resp the resp
-   * @throws ServletException the servlet exception
-   * @throws IOException      the io exception
-   */
-  protected void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  private void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     if(req.getParameter("confirmPurchase") != null) {
       Enumeration attrNames = req.getAttributeNames();
       while( attrNames.hasMoreElements() ) {
@@ -49,5 +34,15 @@ public class Submitter extends HttpServlet {
       RequestDispatcher rd = req.getRequestDispatcher("/recharge");
       rd.forward(req, resp);
     }
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    doDispatch(req, resp);
+  }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    super.doGet(req, resp);
   }
 }

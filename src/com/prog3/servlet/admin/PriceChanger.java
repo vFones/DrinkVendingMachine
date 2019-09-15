@@ -16,7 +16,7 @@ import static java.lang.Float.parseFloat;
 
 @WebServlet(displayName="price_change" , urlPatterns="/admin/price_change")
 public class PriceChanger extends HttpServlet {
-  protected void changePrice(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  private void changePrice(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     req.setAttribute("email", req.getAttribute("email"));
     req.setAttribute("password", req.getAttribute("password"));
 

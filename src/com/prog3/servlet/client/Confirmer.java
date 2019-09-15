@@ -26,9 +26,7 @@ import static java.lang.Integer.parseInt;
  */
 @WebServlet(displayName = "confirm", urlPatterns = "/confirm")
 public class Confirmer extends HttpServlet {
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  private void doConfirm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     boolean err = false;
 
     Date date = new Date();
@@ -123,5 +121,13 @@ public class Confirmer extends HttpServlet {
     RequestDispatcher rd = req.getRequestDispatcher("/client");
     rd.forward(req, resp);
   }
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    doConfirm(req, resp);
+  }
 
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    super.doGet(req, resp);
+  }
 }

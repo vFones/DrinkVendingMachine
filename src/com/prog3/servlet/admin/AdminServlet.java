@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(displayName = "admin", urlPatterns = "/admin")
 public class AdminServlet extends HttpServlet {
-  protected void doAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  private void doAdmin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     String err = (String) req.getAttribute("err");
     if(err == null)

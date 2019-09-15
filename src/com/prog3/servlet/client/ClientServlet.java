@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 @WebServlet(displayName = "client", urlPatterns = "/client")
 public class ClientServlet extends HttpServlet{
-  public void doClientServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  private void doClientServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     req.setAttribute("drinkList",new GenericDao<Product>("from Product order by prod_id").getAll());
 
     if(req.getSession(false) != null)

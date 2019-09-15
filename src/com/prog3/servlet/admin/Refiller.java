@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet(displayName="refill", urlPatterns = "/admin/refill")
 public class Refiller extends HttpServlet {
-  void doRefill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  private void doRefill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try{
       List<Product> productList = new GenericDao<Product>("from Product where stock<=1").getAll();
       for ( Product p : productList) {

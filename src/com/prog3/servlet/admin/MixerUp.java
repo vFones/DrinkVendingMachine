@@ -15,7 +15,7 @@ import static java.lang.Float.parseFloat;
 
 @WebServlet(displayName = "new_drink", urlPatterns = "/admin/new_drink")
 public class MixerUp extends HttpServlet {
-  protected void addNewDrink(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+  private void addNewDrink(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
     String drinkId = req.getParameter("drinkId");
     String newIngredients = req.getParameter("newIngredients");
     String newPrice = req.getParameter("newPrice");

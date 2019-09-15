@@ -18,8 +18,7 @@ import static java.lang.Integer.parseInt;
 
 @WebServlet(displayName = "recharge", urlPatterns = "/recharge")
 public class Recharger extends HttpServlet {
-
-  protected void doRecharge(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  private void doRecharge(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String idKeyString = req.getParameter("keyId");
     String billString = req.getParameter("bill");
     float bill = parseFloat(billString.substring(0, billString.length() - 3));
