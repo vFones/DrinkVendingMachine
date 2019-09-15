@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * The type Sign in filter.
+ * Web filter used for check right coockie in all admin subpath.
+ *
  */
 @WebFilter(filterName = "SignIn", urlPatterns = "/admin/*", dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE})
 public class SignInFilter implements Filter {
@@ -18,6 +19,8 @@ public class SignInFilter implements Filter {
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) req;
 
+
+    // get all coockies and check if exist the one with admin name
     Cookie[] cookies = request.getCookies();
     Cookie cookieLogIn = null;
     if(cookies != null) {
@@ -29,6 +32,8 @@ public class SignInFilter implements Filter {
       }
     }
 
+    // if not found than return to client with error in get call.
+    // otherwise continue in chain filter
     if (cookieLogIn == null) {
       req.getRequestDispatcher("/client"+"?err=\"true\"").include(req, res);
     } else {

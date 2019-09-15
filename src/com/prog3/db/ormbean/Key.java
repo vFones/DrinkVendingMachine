@@ -18,9 +18,17 @@ public class Key {
   @Column(name="balance", nullable = false)
   private float balance;
 
+  /**
+   * Instantiates a new Key.
+   */
   public Key() {
   }
 
+  /**
+   * Instantiates a new Key.
+   *
+   * @param balance the balance
+   */
   public Key(float balance) {
     this.balance = balance;
   }

@@ -14,25 +14,28 @@ import java.io.IOException;
 import static com.prog3.util.Float2.round;
 import static java.lang.Float.parseFloat;
 
+/**
+ * Price servlet used for control price modified
+ */
 @WebServlet(displayName="price_change" , urlPatterns="/admin/price_change")
 public class PriceChanger extends HttpServlet {
   private void changePrice(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    req.setAttribute("email", req.getAttribute("email"));
-    req.setAttribute("password", req.getAttribute("password"));
-
     String newPrice = req.getParameter("priceValue");
-
+    //get new value
     GenericDao<Product> productDao = new GenericDao<Product>();
-
     Product product = null;
+
+    // try to get product querying Bean
     try{ product = productDao.queryBean("from Product where id=" + req.getParameter("drink")); }
-    catch (NullPointerException e) { System.out.println(e); }
+    catch (NullPointerException e) { System.out.println(e.getMessage()); }
     finally {
-      try { product.setPrice(round(parseFloat(newPrice), 2).floatValue()); }
-      catch ( NumberFormatException e){ System.out.println(e); }
+      // if success then set new Price and update product
+      try { product.setPrice(round(parseFloat(newPrice), 2)); }
+      catch ( NumberFormatException e){ System.out.println(e.getMessage()); }
       finally { productDao.update(product);}
     }
 
+    //return to admin panel
     RequestDispatcher rd = req.getRequestDispatcher("/admin");
     rd.forward(req, resp);
   }

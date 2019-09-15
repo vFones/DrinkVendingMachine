@@ -7,22 +7,52 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
+/**
+ * The type Abstract crud method.
+ *
+ * @param <T> the type parameter
+ */
 abstract class ACrudMethod<T> {
   private List<T> list;
+
+  /**
+   * Db operations to implement
+   *
+   * @param session the session
+   */
   public abstract void dbOperations(Session session);
 
+  /**
+   * Sets list.
+   *
+   * @param list the list
+   */
   public void setList(List<T> list) {
     this.list = list;
   }
 
+  /**
+   * Gets list.
+   *
+   * @return the list
+   */
   public List<T> getList() { return list;
   }
+
+  /**
+   * Gets the bean
+   *
+   * @return the the bean
+   */
   public T getT() {
     if(list.size() >0 )
       return list.get(0);
     return null;
   }
 
+  /**
+   * Run hibernate configurations.
+   */
   public void run(){
     Transaction transaction = null;
     Session session = null;
@@ -42,6 +72,7 @@ abstract class ACrudMethod<T> {
       }
       e.printStackTrace();
     } finally {
+      assert session != null;
       session.close();
     }
   }

@@ -22,7 +22,8 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 /**
- * The type Confirm servlet.
+ * The confirm servlet is the one with more operations since need to create all payment information before send it
+ * to the proper chain of responsibility for parsing in models.
  */
 @WebServlet(displayName = "confirm", urlPatterns = "/confirm")
 public class Confirmer extends HttpServlet {
@@ -38,29 +39,32 @@ public class Confirmer extends HttpServlet {
     String keyId = req.getParameter("keyId");
     String ccId = req.getParameter("ccId");
 
-    Float coins = parseFloat( req.getParameter("coins") );
+    float coins = parseFloat( req.getParameter("coins") );
+    float stockDiff = Float.MAX_VALUE;
 
-    Float stockDiff = Float.MAX_VALUE;
+    //get drink and if setted query it.
     String drinkValue = req.getParameter("drink");
     if (drinkValue == null) {
       req.setAttribute("msg", "No drink selected...");
-      req.setAttribute("coins", coins.toString());
+      req.setAttribute("coins", Float.toString(coins));
       err = true;
     }
     else{
       prod = productDao.queryBean("from Product where prod_id=" + drinkValue);
-      stockDiff = Float2.round(prod.getStock(),2 ).floatValue() - 0.25F;
+      stockDiff = Float2.round(prod.getStock(),2 ) - 0.25F;
     }
 
+    // check stock
     if(stockDiff < 1) {
-      //TODO: observer email
       req.setAttribute("msg", "Not enough stock remaining...");
       err = true;
     }
 
+    // create purchase and start filling it
     Purchase purchase = new Purchase(date, prod, false, null, null);
     Payment payment = null;
 
+    //if payment search for suitable Key ID or CC number
     if(coins == 0.0 && keyId.equals("") && ccId.equals("")) {
       req.setAttribute("msg", "No payment selected...");
       err = true;
@@ -85,18 +89,20 @@ public class Confirmer extends HttpServlet {
         purchase.setCash(true);
       }
 
+      // with all information in purchase, fill payment and pass thought the chain of responsibility
       payment = new Payment(coins, false, purchase);
       new PaymentChain().makeRequest(payment);
 
-      //handle result from payment
-      EPaymentType paymentType = payment.getType();
 
+      // handle result from payment
+      // if not paid search for a cause
+      EPaymentType paymentType = payment.getType();
       if ( !payment.isPaid() && paymentType != null) {
         err = true;
         switch (paymentType) {
           case CASH:
             req.setAttribute("msg", "Not enough coins...");
-            req.setAttribute("coins", coins.toString());
+            req.setAttribute("coins", Float.toString(coins));
             break;
           case KEY:
             if(key != null)
@@ -108,19 +114,24 @@ public class Confirmer extends HttpServlet {
       }
     }
 
+    // if arrived here with no errors than
     if(!err) {
+      //update stock informations
       prod.setStock(stockDiff);
       productDao.update(prod);
 
+      //set the purchase
       new GenericDao<Purchase>().save(payment.getPurchase());
 
       req.setAttribute("msg", "Payment received, delivering...");
       req.setAttribute("coins", "0.0");
     }
-    //always do
+
+    //always do return to client
     RequestDispatcher rd = req.getRequestDispatcher("/client");
     rd.forward(req, resp);
   }
+
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     doConfirm(req, resp);

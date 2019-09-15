@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * refill servlet used for refill all product in stock
+ */
 @WebServlet(displayName="refill", urlPatterns = "/admin/refill")
 public class Refiller extends HttpServlet {
   private void doRefill(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    try{
+    try {
+      // query items and if under 1L per prod than update stock
       List<Product> productList = new GenericDao<Product>("from Product where stock<=1").getAll();
       for ( Product p : productList) {
         p.setStock(50);
@@ -23,11 +27,11 @@ public class Refiller extends HttpServlet {
       }
     }
     catch(NullPointerException e){
-      System.out.println(e);
+      System.out.println(e.getMessage());
     }
+    //return to admin
     RequestDispatcher rd = req.getRequestDispatcher("/admin");
     rd.forward(req, resp);
-
   }
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

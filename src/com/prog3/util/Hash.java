@@ -4,7 +4,16 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Hash util class
+ */
 public class Hash {
+  /**
+   * Create an hash with md5 algorithm.
+   *
+   * @param s string
+   * @return hashed string
+   */
   public static String md5Hash(String s) {
     String hashword = null;
     MessageDigest md5 = null;

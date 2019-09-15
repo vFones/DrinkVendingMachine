@@ -22,9 +22,19 @@ public class Product {
   @Column(name="name", unique = true, nullable = false)
   private String name;
 
+  /**
+   * Instantiates a new Product.
+   */
   public Product() {
   }
 
+  /**
+   * Instantiates a new Product.
+   *
+   * @param price the price
+   * @param stock the stock
+   * @param name  the name
+   */
   public Product(float price, float stock, String name) {
     this.price = price;
     this.stock = stock;

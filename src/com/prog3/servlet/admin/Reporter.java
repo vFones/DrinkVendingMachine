@@ -19,16 +19,21 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Reporter Servlet used for purchase list based on month and year
+ */
 @WebServlet(displayName = "reporter", urlPatterns = "/admin/report")
 public class Reporter extends HttpServlet {
   private void getReport(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     int month = 1, year = 1900;
 
+    //parse month and year from JSP
     try {
       month = parseInt(req.getParameter("month"));
       year = parseInt(req.getParameter("year"));
     } catch (NumberFormatException ignored){ }
 
+    // format it
     DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
     LocalDate lastDay = YearMonth.of(year,month).atEndOfMonth();
 
@@ -43,9 +48,11 @@ public class Reporter extends HttpServlet {
       System.out.println(e);
     }
     finally {
+      //query list and set attribute
       purchaseList = new GenericDao<Purchase>(query).getAll();
       req.setAttribute("purchaseList", purchaseList);
     }
+    //return to admin
     RequestDispatcher rd = req.getRequestDispatcher("/admin");
     rd.forward(req, resp);
   }

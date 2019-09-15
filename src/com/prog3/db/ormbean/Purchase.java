@@ -36,9 +36,21 @@ public class Purchase {
   @JoinColumn(name="id_key")
   private Key key;
 
+  /**
+   * Instantiates a new Purchase.
+   */
   public Purchase() {
   }
 
+  /**
+   * Instantiates a new Purchase.
+   *
+   * @param date      the date
+   * @param product   the product
+   * @param cash      the cash
+   * @param cc_number the cc number
+   * @param key       the key
+   */
   public Purchase(Date date, Product product, boolean cash, String cc_number, Key key) {
     this.date = date;
     this.product = product;
