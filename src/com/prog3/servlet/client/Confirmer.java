@@ -25,7 +25,7 @@ import static java.lang.Integer.parseInt;
  * The type Confirm servlet.
  */
 @WebServlet(displayName = "confirm", urlPatterns = "/confirm")
-public class ConfirmServlet extends HttpServlet {
+public class Confirmer extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,8 +36,6 @@ public class ConfirmServlet extends HttpServlet {
     GenericDao<Product> productDao = new GenericDao<Product>();
     Product prod = new Product();
     Key key = null;
-
-    //Chain of Responsibility
 
     String keyId = req.getParameter("keyId");
     String ccId = req.getParameter("ccId");

@@ -25,7 +25,6 @@ public class GenericDao<T> {
     dbOperation.run();
   }
 
-
   public void update(T t) {
     dbOperations<T> dbOperation = new dbOperations<T>(new UpdateMethod<T>(t));
     dbOperation.run();

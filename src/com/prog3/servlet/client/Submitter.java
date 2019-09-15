@@ -1,4 +1,4 @@
-package com.prog3.servlet;
+package com.prog3.servlet.client;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 /**
- * The type Dispatcher.
+ * The type Submitter.
  */
 @WebServlet(displayName = "dispatcher", urlPatterns = "/submit")
-public class Dispatcher extends HttpServlet {
+public class Submitter extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override

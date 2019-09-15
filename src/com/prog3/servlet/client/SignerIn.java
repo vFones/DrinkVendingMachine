@@ -11,8 +11,8 @@ import static com.prog3.util.LogIn.correctLogin;
 
 
 @WebServlet(displayName = "log_in", urlPatterns = "/log_in")
-public class LogInServlet extends HttpServlet {
-  protected void doLogIn(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class SignerIn extends HttpServlet {
+  private void doLogIn(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String email = req.getParameter("email");
     String password = req.getParameter("password");
 

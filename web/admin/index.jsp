@@ -110,9 +110,23 @@
         </div>
       </div>
       <!-- report -->
-      <div class="row">
+      <div class="row justify-content-center">
         <form action="${pageContext.request.contextPath}/admin/report" method="post">
-          <input class="datepicker" data-date-format="mm/dd/yyyy">
+          <select name="month" class="col-3 form-control btn btn-light btn-lg">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+          <input type="text" name="year" class="col-3 form-control btn btn-light btn-lg">
           <button type="submit" class="btn btn-light btn-lg">search</button>
         </form>
         <div class="table-wrapper-scroll-y my-custom-scrollbar container">

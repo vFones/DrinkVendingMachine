@@ -19,6 +19,9 @@ public class ClientServlet extends HttpServlet{
   public void doClientServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     req.setAttribute("drinkList",new GenericDao<Product>("from Product order by prod_id").getAll());
 
+    if(req.getSession(false) != null)
+      req.getSession(false).invalidate();
+
     String err = req.getParameter("err");
     if(err != null)
       req.setAttribute("alert", "show");

@@ -2,7 +2,6 @@ package com.prog3.servlet.admin;
 
 import com.prog3.db.dao.GenericDao;
 import com.prog3.db.ormbean.Product;
-import com.prog3.db.ormbean.Purchase;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,9 +19,6 @@ public class AdminServlet extends HttpServlet {
     if(err == null)
       req.setAttribute("err", "hide");
 
-    if(true/**/) {
-      req.setAttribute("purchaseList", new GenericDao<Purchase>("from Purchase").getAll());
-    }
     req.setAttribute("drinkList",  new GenericDao<Product>("from Product order by prod_id").getAll());
 
     RequestDispatcher rd = req.getRequestDispatcher("/admin/index.jsp");
