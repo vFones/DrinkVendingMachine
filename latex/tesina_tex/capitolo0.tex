@@ -1,0 +1,23 @@
+\thispagestyle{headings}
+\chapter{Introduzione} \label{cap0}
+Il progetto in esame \textbf{\`e un simulatore di un distributore automatico di bevande}, abbreviato
+D.V.M.\footnote{Drink Vending Machine. In inglese vending machine \`e il distributore automatico}.
+L'applicativo prevede due utilizzi, uno da \textbf{utilizzatore} e il secondo come \textbf{super utente}.
+Per praticit\'a l'utente non ha bisogno di effettuare un accesso tramite username e password, sebbene sia identificabile
+come vedremo. Si definisco di seguito gli attori e i loro task come da traccia.\newline
+\textbf{L'utente} pu\`o:
+\begin{itemize}
+    \item scegliere, prelevare e pagare una bevanda. Il pagamento pu\`o avvenire
+    secondo le modalit\`a: contanti (5,10,20,50 centesimi, 1 e 2 euro), chiavetta
+    ricaricabile o carta di credito;
+    \item ricaricare una chiavetta inserendo contanti (5,10,20,50 euro).
+\end{itemize}
+
+\textbf{L'amministratore} pu\`o:
+\begin{itemize}
+    \item periodicamente aggiungere bevande alla scorta. Il sistema controlla automaticamente se la bevanda
+    \`e sotto scorta (minore di 1 litro);
+    \item  definire il prezzo per ogni tipo di bevanda;
+    \item  fare un report sui consumi mensili delle diverse tipologie di bevande;
+    \item aggiungere una nuova tipologia di bevanda partendo da quelle gi\`a esistenti (e.g., th\`e con limone);
+\end{itemize}

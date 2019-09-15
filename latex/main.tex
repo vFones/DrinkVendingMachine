@@ -1,0 +1,85 @@
+
+\documentclass[12pt,italian,a4paper,oneside,openright]{book}
+\usepackage{url,amsfonts,epsfig}
+\usepackage[italian]{babel}
+\usepackage[latin1]{inputenc}
+%\usepackage[format=hang,font=footnotesize]{caption}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{textcomp}
+%\usepackage{algorithm,algorithmic}
+\graphicspath{{img/}}
+\usepackage[hyperindex]{hyperref} %per l'indice interattivo
+\hypersetup{colorlinks=true, linkcolor=black} %per colorare i link
+\DeclareGraphicsRule{.jpg}{jpg}{}{} %da commentare per il PDF
+
+\begin{document}
+\pagenumbering{Roman}
+
+%%%% Opzione per interlinea 2
+\baselineskip 1.5em
+
+%% FRONTESPIZIO
+{ \thispagestyle{empty}
+
+\vskip 1cm \large \centerline{\textsc{Universit\`a degli Studi di
+Napoli ``Parthenope''}}
+
+\centerline {\textsc{Dipartimento di Scienze e Tecnologie}}
+
+\centerline {\small\textsc{Corso di laurea Triennale in Informatica}}
+
+\begin{center}
+\includegraphics[scale=0.5]{logo_parthenope.png}
+\end{center}
+
+\vskip 0.5cm
+
+\large \centerline {\textsc{Programmazione 3 e Laboratorio di Programmazione 3}}
+
+\vskip 0.5cm
+
+\Large \centerline {Distributore bevande}
+
+
+\vskip 4.5cm
+
+
+\large
+\begin{minipage}[t]{7cm}
+\textsc{Docente}
+
+Prof. Angelo Ciaramella
+
+\end{minipage}
+\hfill
+\begin{minipage}[t]{6cm}
+\hfill \textsc{Candidato}
+
+\hfill Vittorio Fones 0124/1384
+\end{minipage}
+
+\vskip 2.0 cm \Large \centerline {Anno Accademico 2018-2019}
+\vfill \eject}
+
+% fine frontespizio
+
+\markboth{Indice}{Indice}
+\tableofcontents
+\listoffigures
+\newpage
+
+\pagenumbering{arabic}
+\input{tesina_tex/capitolo0.tex}
+\input{tesina_tex/capitolo1.tex}
+\input{tesina_tex/capitolo2.tex}
+\input{tesina_tex/capitolo3.tex}
+\input{tesina_tex/bibliografia.tex}
+
+\newpage
+\pagestyle{plain}
+
+
+\end{document}

@@ -1,0 +1,27 @@
+\def\baselinestretch{1}
+\chapter{Scelte progettuali} \label{cap1}
+\def\baselinestretch{1.66}
+\section{Tecnologie usate}
+Il progetto \`e stato sviluppato come una web application, utilizzando le note tecnologie Servlet e JSP
+eseguite nel web server Apache Tomcat. Per le JSP\footnote{JavaServer Pages},
+ovvero le pagine dinamiche in formato HTML, sono state sviluppate usando la recente notazione con tag JSTL che rende 
+la lettura e interpretazione (da parte del programmatore) pi\`u semplice. 
+I dati sono memorizzati in un database relazionale, usando PostgreSQL come RDBMS. L'interfaccia con la
+quale si comunica alla base di dati \`e offerta dal noto framework Open Source
+Hibernate, per tanto il cambiamento della sorgente dati \`e immediato,
+baster\`a modificare il file di configurazione .xml\footnote{Scelta arbitraria tra la configurazione del
+file .xml o la codifica nella classe atta alla configurazione}.
+\newpage
+\section{Architettura e logica di funzionamento}
+Lo sviluppo delle web application \`e per lo pi\`u basato seguendo un pattern noto come MVC (Model - view - controller). Il compito di questo pattern \`e di dividere la presentazione,
+ovvero l'interfaccia utente, e la sua logica di come manipola i dati e li presenta all'utilizzatore dell'applicativo.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{img/MVC-Process.eps}
+    \caption{Diagramma di interazione del pattern MVC.}
+\end{figure}
+
+Il componente \textbf{controller} \`e dato dalle classi che estendono le Servlet: prendono i dati forniti dall'utente
+e contribuiscono al normale flusso dell'applicazione, interagendo con i dati.
+Il \textbf{model}, \`e composto dai \textbf{data model}, identificati pi\`u semplicemente come \textbf{Java Bean} (classi con attributi privati e metodi Getter e Setter) e dalle \textbf{actions} (modificatori dei data model).
+Nel caso di questo progetto le actions e i controller sono le servlet che scambiandosi i parametri delle chiamate Http usando i metodi Get e Post, aggiornano le \textbf{views}: i file JSP che utilizzando EL\footnote{Expression Language}.

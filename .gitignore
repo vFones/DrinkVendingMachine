@@ -1,5 +1,0 @@
-# Project exclude paths
-.DS_Store
-out/
-target/
-lib/

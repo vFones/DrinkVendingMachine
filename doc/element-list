@@ -1,0 +1,8 @@
+com.prog3.db.dao
+com.prog3.db.dao.tm
+com.prog3.db.ormbean
+com.prog3.servlet.admin
+com.prog3.servlet.client
+com.prog3.servlet.client.cor
+com.prog3.servlet.filter
+com.prog3.util
