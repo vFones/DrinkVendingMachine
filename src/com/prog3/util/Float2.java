@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class Float2{
   /**
    * Round float to decimalPlace
-   * es: 2.03124515 -> 2.03 if decimalPlace is 2.
+   * es: 2.03124515 to 2.03 if decimalPlace is 2.
    *
    * @param d            the float number
    * @param decimalPlace the decimal place
